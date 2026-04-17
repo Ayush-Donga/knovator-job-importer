@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'bullmq';
-import { Redis } from 'ioredis';
+import { Redis, RedisOptions } from 'ioredis';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -7,7 +7,7 @@ dotenv.config();
 // Create a singleton connection with better stability for slow networks
 const redisUrl = process.env.REDIS_URL?.replace(/"/g, ''); // Clear any accidentally added quotes
 
-const redisOptions = {
+const redisOptions: RedisOptions = {
   maxRetriesPerRequest: null,
   enableReadyCheck: false,
   enableOfflineQueue: true,
@@ -18,7 +18,8 @@ export const redisConnection = redisUrl
   : new Redis({
       host: process.env.REDIS_HOST || '127.0.0.1',
       port: parseInt(process.env.REDIS_PORT || '6379'),
-    }, redisOptions);
+      ...redisOptions
+    });
 
 export const redisConfig = redisConnection;
 
