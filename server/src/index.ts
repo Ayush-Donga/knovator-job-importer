@@ -2,13 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { initCronJobs, triggerManualImport } from './services/CronService';
-import './workers/importWorker';
-import './workers/jobUpsertWorker';
-import ImportLog from './models/ImportLog';
+import { initCronJobs, triggerManualImport } from './services/CronService.js';
+import './workers/importWorker.js';
+import './workers/jobUpsertWorker.js';
+import ImportLog from './models/ImportLog.js';
 
 import http from 'http';
-import SocketService from './services/SocketService';
+import SocketService from './services/SocketService.js';
 
 dotenv.config();
 

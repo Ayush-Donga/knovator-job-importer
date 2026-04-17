@@ -1,5 +1,5 @@
 import nodeCron from 'node-cron';
-import { importQueue } from '../queues';
+import { importQueue } from '../queues/index.js';
 
 const FEED_URLS = [
   'https://jobicy.com/?feed=job_feed',

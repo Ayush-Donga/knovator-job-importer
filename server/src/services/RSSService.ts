@@ -1,6 +1,6 @@
 import axios from 'axios';
 import xml2js from 'xml2js';
-import { IJob } from '../models/Job';
+import { IJob } from '../models/Job.js';
 
 export interface RawJob {
   title: string;

@@ -1,8 +1,8 @@
 import { Worker, Job as BullJob } from 'bullmq';
-import { redisConfig, QUEUE_NAMES, workerSettings } from '../config/queue';
-import Job from '../models/Job';
-import ImportLog from '../models/ImportLog';
-import SocketService from '../services/SocketService';
+import { redisConfig, QUEUE_NAMES, workerSettings } from '../config/queue.js';
+import Job from '../models/Job.js';
+import ImportLog from '../models/ImportLog.js';
+import SocketService from '../services/SocketService.js';
 
 export const jobUpsertWorker = new Worker(
   QUEUE_NAMES.JOB_UPSERT,
