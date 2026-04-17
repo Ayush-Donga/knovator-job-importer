@@ -7,14 +7,18 @@ dotenv.config();
 // Create a singleton connection with better stability for slow networks
 const redisUrl = process.env.REDIS_URL?.replace(/"/g, ''); // Clear any accidentally added quotes
 
-export const redisConnection = new Redis(redisUrl || {
-  host: process.env.REDIS_HOST || '127.0.0.1',
-  port: parseInt(process.env.REDIS_PORT || '6379'),
-}, {
+const redisOptions = {
   maxRetriesPerRequest: null,
   enableReadyCheck: false,
-  enableOfflineQueue: true, // Re-enable temporarily for stability if connection is flickery
-});
+  enableOfflineQueue: true,
+};
+
+export const redisConnection = redisUrl 
+  ? new Redis(redisUrl, redisOptions)
+  : new Redis({
+      host: process.env.REDIS_HOST || '127.0.0.1',
+      port: parseInt(process.env.REDIS_PORT || '6379'),
+    }, redisOptions);
 
 export const redisConfig = redisConnection;
 
